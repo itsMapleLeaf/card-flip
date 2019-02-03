@@ -27,6 +27,14 @@ const sample = <T extends any>(items: T[], count: number) => {
   return result
 }
 
+const range = (size: number) => {
+  const result = Array(size)
+  for (let i = 0; i < size; i++) {
+    result[i] = i
+  }
+  return result
+}
+
 type Card = {
   image: string
 }
@@ -45,6 +53,7 @@ const App = () => {
   const [selectedCards, setSelectedCards] = useState<Card[]>([])
   const [revealedCards, setRevealedCards] = useState<Card[]>([])
   const [interactionDisabled, setInteractionDisabled] = useState(false)
+  const [attemptCount, setAttemptCount] = useState(0)
 
   useEffect(() => {
     revealSomeCards(cards)
@@ -78,6 +87,7 @@ const App = () => {
       } else {
         await wait(800)
         setSelectedCards([])
+        setAttemptCount((count) => count + 1)
       }
     }
   }
@@ -85,6 +95,7 @@ const App = () => {
   const resetGame = async () => {
     setSelectedCards([])
     setRevealedCards([])
+    setAttemptCount(0)
 
     await wait(800)
 
@@ -95,6 +106,10 @@ const App = () => {
 
   return (
     <>
+      <h1 className="attempt-counter">
+        Attempts: {range(attemptCount).map(() => "❌")}
+      </h1>
+
       <div className="cards">
         {cards.map((card, index) => (
           <Card
@@ -105,6 +120,7 @@ const App = () => {
           />
         ))}
       </div>
+
       <button onClick={resetGame}>reset</button>
     </>
   )

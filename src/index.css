@@ -18,6 +18,8 @@ a {
   color: whitesmoke;
 
   background-color: var(--theme-color);
+
+  word-break: break-word;
 }
 
 body {
@@ -64,6 +66,12 @@ body {
 
 .card-text {
   backface-visibility: hidden;
+}
+
+h1 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 300;
+  margin: 1.5rem 0;
 }
 
 button {
