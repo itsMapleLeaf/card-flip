@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import Card from "./Card"
-import range from "./range"
 import sample from "./sample"
 import shuffle from "./shuffle"
 import wait from "./wait"
@@ -86,7 +85,7 @@ const App = () => {
           />
         ))}
       </main>
-      <h1 className="attempt-counter">{range(attemptCount).map(() => "❌")}</h1>
+      <h1 className="attempt-counter">{Array(attemptCount).fill("❌")}</h1>
       <button onClick={resetGame}>Reset</button>
       <footer>
         <a
