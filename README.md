@@ -1,1 +1,1 @@
-i made this because i was bored
+A custom version of the [DevWars](https://www.devwars.tv/) memory game challenge
