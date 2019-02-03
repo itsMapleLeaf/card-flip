@@ -2,8 +2,8 @@ import React from "react"
 
 type CardProps = {
   image: string
-  onSelect: () => void
   isVisible: boolean
+  onSelect: () => void
 }
 
 const Card = ({ image, onSelect, isVisible }: CardProps) => (
