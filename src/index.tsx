@@ -97,27 +97,39 @@ const App = () => {
     <>
       <div className="cards">
         {cards.map((card, index) => (
-          <a
+          <Card
             key={index}
-            className={`card-container ${
-              cardIsVisible(card) ? "card-visible" : ""
-            }`}
-            href="#"
-            role="button"
-            onClick={(event) => {
-              event.preventDefault()
-              selectCard(card)
-            }}
-            onDragStart={(event) => event.preventDefault()}
-          >
-            <div className="card-content" />
-            <div className="card-content card-text">{card.image}</div>
-          </a>
+            image={card.image}
+            onClick={() => selectCard(card)}
+            isVisible={cardIsVisible(card)}
+          />
         ))}
       </div>
       <button onClick={resetGame}>reset</button>
     </>
   )
 }
+
+type CardProps = {
+  image: string
+  onClick: () => void
+  isVisible: boolean
+}
+
+const Card = ({ image, onClick, isVisible }: CardProps) => (
+  <a
+    className={`card-container ${isVisible ? "card-visible" : ""}`}
+    href="#"
+    role="button"
+    onClick={(event) => {
+      event.preventDefault()
+      onClick()
+    }}
+    onDragStart={(event) => event.preventDefault()}
+  >
+    <div className="card-content" />
+    <div className="card-content card-text">{image}</div>
+  </a>
+)
 
 ReactDOM.render(<App />, document.getElementById("root"))
