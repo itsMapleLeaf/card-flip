@@ -1,14 +1,56 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+:root {
+  --theme-color: rgb(30, 30, 50);
+  --theme-color-alt: rgb(40, 40, 60);
+
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+  color: whitesmoke;
+
+  background-color: var(--theme-color);
+}
+
+body {
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 10px;
+
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.card {
+  height: 100px;
+  display: flex;
+  font-size: 50px;
+
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--theme-color-alt);
+
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  background-color: var(--theme-color-alt);
+  font: inherit;
+  color: inherit;
+  border: none;
+  padding: 1rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
 }
