@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
 import "./index.css"
 
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
 const shuffle = <T extends any>(items: T[]) => {
   const result = [...items]
   for (let i = 0; i < items.length; i++) {
@@ -26,13 +28,10 @@ const sample = <T extends any>(items: T[], count: number) => {
 }
 
 type Card = {
-  id: number
   image: string
 }
 
-let cardId = 0
 const createCard = (image: string): Card => ({
-  id: cardId++,
   image,
 })
 
@@ -47,23 +46,25 @@ const App = () => {
   const [revealedCards, setRevealedCards] = useState<Card[]>([])
   const [interactionDisabled, setInteractionDisabled] = useState(false)
 
-  useEffect(() => revealSomeCards(cards), [])
+  useEffect(() => {
+    revealSomeCards(cards)
+  }, [])
 
-  const revealSomeCards = (cards: Card[]) => {
+  const revealSomeCards = async (cards: Card[]) => {
     setInteractionDisabled(true)
 
     setRevealedCards(sample(cards, 6))
 
-    setTimeout(() => {
-      setRevealedCards([])
-      setInteractionDisabled(false)
-    }, 2000)
+    await wait(2000)
+
+    setRevealedCards([])
+    setInteractionDisabled(false)
   }
 
   const cardIsVisible = (card: Card) =>
     selectedCards.includes(card) || revealedCards.includes(card)
 
-  const selectCard = (card: Card) => {
+  const selectCard = async (card: Card) => {
     if (interactionDisabled) return
     if (cardIsVisible(card)) return
     if (selectedCards.length > 1) return
@@ -75,35 +76,42 @@ const App = () => {
         setRevealedCards((prev) => [...prev, ...selectedCards, card])
         setSelectedCards([])
       } else {
-        setTimeout(() => {
-          setSelectedCards([])
-        }, 800)
+        await wait(800)
+        setSelectedCards([])
       }
     }
   }
 
-  const resetGame = () => {
+  const resetGame = async () => {
+    setSelectedCards([])
+    setRevealedCards([])
+
+    await wait(800)
+
     const newCards = createCards()
     setCards(newCards)
-    setSelectedCards([])
-    // setRevealedCards([])
     revealSomeCards(newCards)
   }
 
   return (
     <>
       <div className="cards">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <a
-            className="card"
+            key={index}
+            className={`card-container ${
+              cardIsVisible(card) ? "card-visible" : ""
+            }`}
             href="#"
             role="button"
             onClick={(event) => {
               event.preventDefault()
               selectCard(card)
             }}
+            onDragStart={(event) => event.preventDefault()}
           >
-            {cardIsVisible(card) ? card.image : "?"}
+            <div className="card-content" />
+            <div className="card-content card-text">{card.image}</div>
           </a>
         ))}
       </div>
