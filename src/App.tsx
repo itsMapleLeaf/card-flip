@@ -81,7 +81,7 @@ const App = () => {
           <Card
             key={index}
             image={card.image}
-            onClick={() => selectCard(card)}
+            onSelect={() => selectCard(card)}
             isVisible={cardIsVisible(card)}
           />
         ))}

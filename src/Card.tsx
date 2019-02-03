@@ -2,18 +2,18 @@ import React from "react"
 
 type CardProps = {
   image: string
-  onClick: () => void
+  onSelect: () => void
   isVisible: boolean
 }
 
-const Card = ({ image, onClick, isVisible }: CardProps) => (
+const Card = ({ image, onSelect, isVisible }: CardProps) => (
   <a
     className={`card-container ${isVisible ? "card-visible" : ""}`}
     href="#"
     role="button"
-    onClick={(event) => {
+    onMouseUp={(event) => {
       event.preventDefault()
-      onClick()
+      onSelect()
     }}
     onDragStart={(event) => event.preventDefault()}
   >
