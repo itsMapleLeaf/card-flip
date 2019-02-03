@@ -43,7 +43,7 @@ const createCard = (image: string): Card => ({
   image,
 })
 
-const cardImages = [..."🍓☕🚀💯🔥🐱"]
+const cardImages = [..."🍓☕🚀💯🔥🐱✨👀"]
 
 const createCards = () =>
   shuffle([...cardImages, ...cardImages].map(createCard))
@@ -62,7 +62,7 @@ const App = () => {
   const revealSomeCards = async (cards: Card[]) => {
     setInteractionDisabled(true)
 
-    setRevealedCards(sample(cards, 6))
+    setRevealedCards(sample(cards, 8))
 
     await wait(2000)
 
@@ -106,10 +106,6 @@ const App = () => {
 
   return (
     <>
-      <h1 className="attempt-counter">
-        Attempts: {range(attemptCount).map(() => "❌")}
-      </h1>
-
       <div className="cards">
         {cards.map((card, index) => (
           <Card
@@ -120,6 +116,8 @@ const App = () => {
           />
         ))}
       </div>
+
+      <h1 className="attempt-counter">{range(attemptCount).map(() => "❌")}</h1>
 
       <button onClick={resetGame}>reset</button>
     </>
