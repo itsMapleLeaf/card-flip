@@ -76,7 +76,7 @@ const App = () => {
 
   return (
     <>
-      <div className="cards">
+      <main className="cards">
         {cards.map((card, index) => (
           <Card
             key={index}
@@ -85,9 +85,19 @@ const App = () => {
             isVisible={cardIsVisible(card)}
           />
         ))}
-      </div>
+      </main>
       <h1 className="attempt-counter">{range(attemptCount).map(() => "❌")}</h1>
-      <button onClick={resetGame}>reset</button>
+      <button onClick={resetGame}>Reset</button>
+      <footer>
+        <a
+          className="link"
+          href="https://github.com/kingdaro/card-flip"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View Source
+        </a>
+      </footer>
     </>
   )
 }
