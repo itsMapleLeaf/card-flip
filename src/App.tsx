@@ -87,16 +87,6 @@ const App = () => {
       </main>
       <h1 className="attempt-counter">{Array(attemptCount).fill("❌")}</h1>
       <button onClick={resetGame}>Reset</button>
-      <footer>
-        <a
-          className="link"
-          href="https://github.com/kingdaro/card-flip"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Source
-        </a>
-      </footer>
     </>
   )
 }
